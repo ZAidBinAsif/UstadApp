@@ -72,7 +72,7 @@
                         android:layout_height="15dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="5dp"
-                        android:src="@color/black" />
+                        android:src="@drawable/cat" />
 
                     <TextView
                         android:id="@+id/categoryustad"
@@ -99,6 +99,8 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="10dp"
+                    android:visibility="gone"
+
                     android:src="@color/black" />
 
                 <ImageView
@@ -107,6 +109,7 @@
                     android:layout_height="30dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="5dp"
+                    android:visibility="gone"
                     android:layout_toLeftOf="@+id/videocall"
                     android:src="@color/black" />
             </RelativeLayout>
@@ -212,12 +215,12 @@
 
                 <ImageView
                     android:id="@+id/personalimage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_below="@+id/view4"
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="20dp"
-                    android:src="@drawable/ic_profile_plc"
+                    android:src="@drawable/info"
                     android:text="Rs.asdasd"
                     android:textColor="@color/black"
                     android:textSize="16sp" />

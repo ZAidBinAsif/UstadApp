@@ -141,6 +141,6 @@ public class ShowPostFragment extends BaseFragment<PostViewModel> implements Pos
     @Override
     public void onResume() {
         super.onResume();
-        getPosts();
+//        getPosts();
     }
 }

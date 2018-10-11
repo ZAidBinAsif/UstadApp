@@ -35,15 +35,15 @@
 
 
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/inputemail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:errorTextAppearance="@style/error_appearance"
             android:layout_marginEnd="50dp"
-            android:id="@+id/inputemail"
-
             android:layout_marginStart="50dp"
 
-            android:theme="@style/TextLabel">
+            android:theme="@style/TextLabel"
+
+            app:errorTextAppearance="@style/error_appearance">
 
 
             <EditText
@@ -58,14 +58,14 @@
 
 
         <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            app:errorTextAppearance="@style/error_appearance"
             android:id="@+id/inputpassword"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/TextLabel"
-            app:hintEnabled="true"
             android:layout_marginEnd="50dp"
             android:layout_marginStart="50dp"
+            android:theme="@style/TextLabel"
+            app:errorTextAppearance="@style/error_appearance"
+            app:hintEnabled="true"
             app:passwordToggleEnabled="true">
 
 
@@ -80,19 +80,35 @@
 
         </android.support.design.widget.TextInputLayout>
 
-
-        <Button
-            android:id="@+id/btn_signIn"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="32dp"
             android:background="@drawable/round_btn_corner"
-            android:text="Sign In"
-            android:textColor="#fff"
-            android:textSize="16sp" />
 
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/signin" />
+
+            <Button
+                android:id="@+id/btn_signIn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/round_btn_corner"
+
+                android:text="Sign In"
+
+                android:textColor="#fff"
+                android:textSize="16sp" />
+
+
+        </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"

@@ -76,7 +76,12 @@ public class ForgotPasswordViewModel extends BaseViewModel<ForgotPasswordCallbac
                                 getmCallback().inValidEmail("Not Available");
                                 return;
                             } else if (metaData.getError().getCode() == 302) {
-                                getmCallback().inValidEmail(metaData.getError().getMessage());
+                                if(metaData.getError().getMessage().startsWith("Code")){
+                                    getmCallback().inValidCode(metaData.getError().getMessage());
+
+                                }else {
+                                    getmCallback().inValidEmail(metaData.getError().getMessage());
+                                }
                                 return;
                             }
                             UserManager.getInstance().setMetaData(metaData);

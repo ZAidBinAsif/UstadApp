@@ -7,6 +7,20 @@ package com.andrinotech.ustadapp.ui.ChangePassword;
 public class ChangePasswordApiModel {
     String password;
     String email;
+    String code;
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
     public String getPassword() {
         return password;
     }

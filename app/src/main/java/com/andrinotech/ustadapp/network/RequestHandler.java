@@ -56,6 +56,7 @@ public class RequestHandler implements IRequest {
     public Single<MetaData> changepassword(ChangePasswordApiModel changePasswordApiModel) {
         return Rx2AndroidNetworking.post(Config.Api.CHANGE_PASSWORD)
                 .addBodyParameter("email", changePasswordApiModel.getEmail())
+                .addBodyParameter("code", changePasswordApiModel.getCode())
                 .addBodyParameter("password", changePasswordApiModel.getPassword())
                 .build()
                 .getObjectSingle(MetaData.class);

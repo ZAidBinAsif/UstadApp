@@ -3,9 +3,9 @@
     android:shape="rectangle" android:padding="15dp">
     <solid android:color="@color/transparentColr"/>
     <corners
-        android:bottomRightRadius="10dp"
-        android:bottomLeftRadius="10dp"
-        android:topLeftRadius="10dp"
-        android:topRightRadius="10dp"/>
-    <stroke android:width="1dp" android:color="@color/black" />
+        android:bottomRightRadius="5dp"
+        android:bottomLeftRadius="5dp"
+        android:topLeftRadius="5dp"
+        android:topRightRadius="5dp"/>
+    <stroke android:width="1dp" android:color="#20d2bb" />
 </shape>

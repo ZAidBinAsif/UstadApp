@@ -42,16 +42,16 @@ public class EditPasswordActvitiy extends BaseActivity<EditPasswordViewModel> im
 
     public void initViews() {
         et_currentpassword = findViewById(R.id.et_currentpassword);
-        et_email = findViewById(R.id.et_email);
-        input_email = findViewById(R.id.inputemail);
+//        et_email = findViewById(R.id.et_email);
+//        input_email = findViewById(R.id.inputemail);
         input_password = findViewById(R.id.inputpassword);
         input_confirmpassword = findViewById(R.id.inputconfirmpassword);
-        input_email = findViewById(R.id.inputemail);
+//        input_email = findViewById(R.id.inputemail);
         inputold_pasword = findViewById(R.id.inputold_pasword);
         input_password.setEnabled(true);
         inputold_pasword.setEnabled(true);
         input_confirmpassword.setEnabled(true);
-        input_email.setEnabled(true);
+//        input_email.setEnabled(true);
         et_confirm_password = findViewById(R.id.et_confirmpassword);
         et_password = findViewById(R.id.et_password);
         btn_changepassword = findViewById(R.id.btn_changepassword);

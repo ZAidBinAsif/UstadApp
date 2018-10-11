@@ -113,6 +113,8 @@ public class LoginActivity extends BaseActivity<LoginViewModel> implements Login
         dismissDialog();
         finish();
         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+        overridePendingTransition(android.R.anim.slide_out_right, android.R.anim.slide_out_right);
+
         startActivity(intent);
 
     }

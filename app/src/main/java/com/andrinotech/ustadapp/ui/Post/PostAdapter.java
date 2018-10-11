@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.andrinotech.ustadapp.R;
 import com.andrinotech.ustadapp.data.UserManager;
+import com.andrinotech.ustadapp.helper.DateUtils;
 import com.andrinotech.ustadapp.ui.profile.UstadProfile;
 import com.andrinotech.ustadapp.utils.StringUtils;
 import com.bumptech.glide.Glide;
@@ -91,6 +92,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         holder.decription.setText(model.getText());
         holder.name.setText(model.getUstad().getName());
         holder.title.setText(model.getTitle());
+        holder.time.setText(DateUtils.convertMillisecondsToTime(model.getTime()));
+
         if (model.getLike() != null && model.getLike().getType().equalsIgnoreCase("like")) {
             holder.like.setImageResource(R.drawable.ic_thumb_like);
         } else if (model.getLike() != null && model.getLike().getType().equalsIgnoreCase("unlike")) {

@@ -17,10 +17,13 @@ import android.widget.TextView;
 
 import com.andrinotech.ustadapp.R;
 import com.andrinotech.ustadapp.helper.AVProgressDialog;
+import com.andrinotech.ustadapp.helper.DateUtils;
 import com.andrinotech.ustadapp.ui.base.BaseActivity;
 import com.andrinotech.ustadapp.utils.CommonUtils;
 import com.andrinotech.ustadapp.utils.StringUtils;
 import com.andrinotech.ustadapp.utils.multiselect.MultiSelectModel;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
 
@@ -178,6 +181,7 @@ public class AddCommentActivity extends BaseActivity<PostViewModel> implements P
             textNotComnt.setVisibility(View.VISIBLE);
             progressComments.setVisibility(View.GONE);
         }
+        inputAddComment.setText("");
         dismissDialog();
 
     }
@@ -210,18 +214,23 @@ public class AddCommentActivity extends BaseActivity<PostViewModel> implements P
 
             ImageView imageComments = (ImageView) view
                     .findViewById(R.id.imageComments);
-
-
             TextView textCmntsUsername = (TextView) view
                     .findViewById(R.id.textCmntsUsername);
             final TextView textCmntsData = (TextView) view
                     .findViewById(R.id.textCmntsData);
             TextView textCmntsDate = (TextView) view
                     .findViewById(R.id.textCmntsDate);
-            TextView textCmntsEdit = (TextView) view
-                    .findViewById(R.id.textCmntsEdit);
-
-
+            String logo = postModelResponses.get(0).getUstad().getLogo() == null ? "" : postModelResponses.get(0).getUstad().getLogo();
+            Glide.with(AddCommentActivity.this)
+                    .load(logo).dontAnimate()
+                    .fitCenter()
+                    .error(R.drawable.ic_profile_plc)
+                    .placeholder(R.drawable.ic_profile_plc)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(imageComments);
+            textCmntsUsername.setText(postModelResponses.get(0).getUstad().getName());
+            textCmntsData.setText(postModelResponses.get(0).getText());
+            textCmntsDate.setText(DateUtils.ConvertMilliSecondsToTime(postModelResponses.get(0).getTime()));
             return view;
         }
 

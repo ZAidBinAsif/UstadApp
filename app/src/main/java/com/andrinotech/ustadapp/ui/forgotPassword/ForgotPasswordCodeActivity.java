@@ -72,9 +72,9 @@ public class ForgotPasswordCodeActivity extends BaseActivity<ForgotPasswordViewM
     public void initViews() {
         et_email = findViewById(R.id.et_email);
         et_code = findViewById(R.id.et_code);
+        inputcode = findViewById(R.id.inputcode);
 
         input_email = findViewById(R.id.inputemail);
-        inputcode = findViewById(R.id.inputcode);
 
         btn_send_code = findViewById(R.id.btn_send_code);
         btn_signIn = findViewById(R.id.btn_signIn);

@@ -47,8 +47,5 @@ dependencies {
     // network library
     implementation 'com.amitshekhar.android:rx2-android-networking:1.0.1'
 
-//    compile 'com.writingminds:FFmpegAndroid:0.3.2'
-    implementation 'nl.bravobit:android-ffmpeg:1.1.5'
-
 
 }

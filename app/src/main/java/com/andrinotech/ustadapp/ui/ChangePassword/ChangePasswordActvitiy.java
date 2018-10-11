@@ -17,9 +17,9 @@ import com.andrinotech.ustadapp.ui.login.LoginActivity;
 import com.andrinotech.ustadapp.utils.CommonUtils;
 
 public class ChangePasswordActvitiy extends BaseActivity<ChanePasswordViewModel> implements ChangePasswordCallback, View.OnClickListener {
-    private EditText et_password, et_confirm_password, et_email;
+    private EditText et_password, et_confirm_password, et_email,et_code;
     private Button btn_changepassword;
-    TextInputLayout input_email,input_password,input_confirmpassword;
+    TextInputLayout inputcode,input_email,input_password,input_confirmpassword;
 
     private AVProgressDialog mLoadingDialog;
 
@@ -54,6 +54,9 @@ public class ChangePasswordActvitiy extends BaseActivity<ChanePasswordViewModel>
         input_password = findViewById(R.id.inputpassword);
         input_confirmpassword = findViewById(R.id.inputconfirmpassword);
         input_email = findViewById(R.id.inputemail);
+        et_code = findViewById(R.id.et_code);
+        inputcode = findViewById(R.id.inputcode);
+
         input_password.setEnabled(true);
         input_confirmpassword.setEnabled(true);
         input_email.setEnabled(true);
@@ -90,13 +93,14 @@ public class ChangePasswordActvitiy extends BaseActivity<ChanePasswordViewModel>
         mLoadingDialog.show();
         String password = et_password.getText().toString();
         String confirmpassword = et_confirm_password.getText().toString();
+        String code = et_code.getText().toString();
         String email = " ";
         if (checkArguments()) {
             email = UserManager.getInstance().getMetaData().getUser().getEmail();
         } else {
             email=et_email.getText().toString();
         }
-        getViewModel().login(password, confirmpassword, email);
+        getViewModel().changecode(password, confirmpassword, email,code);
 
     }
 
@@ -133,6 +137,14 @@ public class ChangePasswordActvitiy extends BaseActivity<ChanePasswordViewModel>
     }
 
     @Override
+    public void inValidCode(String msg) {
+        dismissDialog();
+        inputcode.setError(msg);
+        inputcode.requestFocus();
+
+    }
+
+    @Override
     public void inValidPassword(String msg) {
         dismissDialog();
 
@@ -149,7 +161,6 @@ public class ChangePasswordActvitiy extends BaseActivity<ChanePasswordViewModel>
     @Override
     public void inValidEmail(String msg) {
         dismissDialog();
-
         input_email.setError(msg);
         input_email.requestFocus();
 

@@ -150,17 +150,35 @@
             </android.support.design.widget.TextInputLayout>
 
 
-            <Button
-                android:id="@+id/btn_signUp"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="32dp"
                 android:background="@drawable/round_btn_corner"
-                android:text="Sign Up"
-                android:textColor="#fff"
-                android:textSize="16sp" />
+
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/signin" />
+
+                <Button
+                    android:id="@+id/btn_signUp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_btn_corner"
+
+                    android:text="Sign In"
+
+                    android:textColor="#fff"
+                    android:textSize="16sp" />
+
+
+            </LinearLayout>
 
 
             <RelativeLayout

@@ -164,7 +164,7 @@ public class Ustad {
     @Expose
     private String price;
 
-    @SerializedName("skils")
+    @SerializedName("skills")
     @Expose
     private String skils;
 

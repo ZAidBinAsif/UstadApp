@@ -48,9 +48,15 @@ public class ChanePasswordViewModel extends BaseViewModel<ChangePasswordCallback
         return isValid;
     }
 
-    public void login(String password, final String confirmpassword, String s) {
+    public void changecode(String password, final String confirmpassword, String s, String code) {
+        if (StringUtils.isNullOrEmpty(code)) {
+            getmCallback().inValidCode("Code Required.");
+            return;
+        }
+
         if (isEmailAndPasswordValid(password, confirmpassword, s)) {
             final ChangePasswordApiModel changePasswordApiModel = new ChangePasswordApiModel(password, s);
+            changePasswordApiModel.setCode(code);
             getmCompositeDisposable().add(getmRequestHandler().changepassword(changePasswordApiModel).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).
                     subscribe(new Consumer<MetaData>() {
                         @Override

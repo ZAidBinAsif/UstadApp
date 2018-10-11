@@ -34,7 +34,7 @@ public class PostModelResponse {
         this.like = like;
     }
 
-    public PostModelResponse(String title, String text, String type, String category, String userId, String time, Ustad ustad) {
+    public PostModelResponse(String title, String text, String type, String category, String userId, long time, Ustad ustad) {
         this.title = title;
         this.ustad = ustad;
         this.text = text;
@@ -64,7 +64,7 @@ public class PostModelResponse {
 
     @SerializedName("time")
     @Expose
-    private String time;
+    private long time;
 
     public String getTotal_like() {
         return total_like;
@@ -137,11 +137,11 @@ public class PostModelResponse {
         this.userId = userId;
     }
 
-    public String getTime() {
+    public long getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(long time) {
         this.time = time;
     }
 }

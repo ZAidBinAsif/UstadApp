@@ -15,6 +15,8 @@ public interface ChangePasswordCallback extends BaseCallBack {
 
     public void passwordLength(String msg);
 
+    public void inValidCode(String msg);
+
     public void inValidPassword(String msg);
     public void inValidEmail(String msg);
 
