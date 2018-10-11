@@ -30,6 +30,7 @@ public class RequestHandler implements IRequest {
         return Rx2AndroidNetworking.post(Config.Api.SignIn)
                 .addBodyParameter("email", authTocken.getEmail())
                 .addBodyParameter("password", authTocken.getPass())
+                .addBodyParameter("fcmKey", UserManager.getFcmKey())
                 .build()
                 .getObjectSingle(MetaData.class);
     }
@@ -81,6 +82,8 @@ public class RequestHandler implements IRequest {
                 .addBodyParameter("username", registerUserApidModel.getUsername())
                 .addBodyParameter("email", registerUserApidModel.getEmail())
                 .addBodyParameter("password", registerUserApidModel.getPassword())
+                .addBodyParameter("fcmKey", UserManager.getFcmKey())
+
                 .build()
                 .getObjectSingle(MetaData.class);
 
