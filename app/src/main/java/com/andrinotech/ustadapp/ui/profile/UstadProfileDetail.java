@@ -4,7 +4,9 @@ package com.andrinotech.ustadapp.ui.profile;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.andrinotech.ustadapp.R;
@@ -17,6 +19,7 @@ public class UstadProfileDetail extends AppCompatActivity {
 
     TextView name, username, phone, email, category, info, skils, status, editprofile;
     ImageView imageView_logo;
+    LinearLayout passwoedlayput;
     private PostModelResponse ustad;
 
     @Override
@@ -41,6 +44,9 @@ public class UstadProfileDetail extends AppCompatActivity {
         }
 
         imageView_logo = findViewById(R.id.imageView_logo);
+        passwoedlayput = findViewById(R.id.passwoedlayput);
+        editprofile = findViewById(R.id.editprofile);
+        editprofile.setVisibility(View.GONE);
         name = findViewById(R.id.name);
         username = findViewById(R.id.username);
         phone = findViewById(R.id.phone);
@@ -49,6 +55,7 @@ public class UstadProfileDetail extends AppCompatActivity {
         category = findViewById(R.id.category);
         info = findViewById(R.id.info);
         skils = findViewById(R.id.skils);
+        passwoedlayput.setVisibility(View.GONE);
         setData();
     }
 

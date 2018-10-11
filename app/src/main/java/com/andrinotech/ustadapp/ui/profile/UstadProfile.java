@@ -17,6 +17,7 @@ import com.andrinotech.ustadapp.ui.Post.PostModelResponse;
 import com.andrinotech.ustadapp.ui.Post.PostViewModel;
 import com.andrinotech.ustadapp.ui.base.BaseActivity;
 import com.andrinotech.ustadapp.utils.CommonUtils;
+import com.andrinotech.ustadapp.utils.GlideHelper;
 import com.andrinotech.ustadapp.utils.StringUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 
 public class UstadProfile extends BaseActivity<PostViewModel> implements PostCallback, View.OnClickListener {
     private AVProgressDialog mLoadingDialog;
-//    private  binding;
+    //    private  binding;
     private PostModelResponse ustad;
     private ProfilePageOfustadBinding binding;
 
@@ -84,7 +85,7 @@ public class UstadProfile extends BaseActivity<PostViewModel> implements PostCal
                 getViewModel().getPostsofUstad(Integer.parseInt(ustad.getUstad().getId()));
 
                 binding.name.setText(ustad.getUstad().getName());
-                binding.price.setText(ustad.getUstad().getPrice());
+                binding.price.setText("Rs. " + ustad.getUstad().getPrice());
                 binding.categoryustad.setText(ustad.getCategory());
                 binding.skilltext.setText(ustad.getUstad().getSkils());
                 binding.personaltext.setText(ustad.getUstad().getInfo());
@@ -132,7 +133,6 @@ public class UstadProfile extends BaseActivity<PostViewModel> implements PostCal
     public void ErrorOnAddPost(String str) {
         dismissDialog();
         CommonUtils.showToast(str);
-
     }
 
     @Override
@@ -147,13 +147,17 @@ public class UstadProfile extends BaseActivity<PostViewModel> implements PostCal
         dismissDialog();
         if (postModelResponses.size() > 0) {
             final PostModelResponse model = postModelResponses.get(0);
-            Glide.with(this)
-                    .load(postModelResponses.get(0).getUstad().getLogo()).dontAnimate()
-                    .fitCenter()
-                    .error(R.drawable.ic_profile_plc)
-                    .placeholder(R.drawable.ic_profile_plc)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(binding.imageViewLogo);
+            String path = ustad.getUstad().getLogo() == null ? "" : ustad.getUstad().getLogo();
+
+            GlideHelper.loadImage(this, path, binding.imageViewLogo, R.drawable.ic_profile_plc);
+
+//            Glide.with(this)
+//                    .load(postModelResponses.get(0).getUstad().getLogo())
+//                    .fitCenter()
+////                    .error(R.drawable.ic_profile_plc)
+////                    .placeholder(R.drawable.ic_profile_plc)
+//                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+//                    .into(binding.imageViewLogo);
             binding.category.setText(model.getCategory());
             binding.decription.setText(model.getText());
             binding.postname.setText(model.getUstad().getName());
@@ -176,8 +180,6 @@ public class UstadProfile extends BaseActivity<PostViewModel> implements PostCal
     public void allcomments(ArrayList<Comment> postModelResponses) {
 
     }
-
-
 
     @Override
     public void onBackPressed() {
