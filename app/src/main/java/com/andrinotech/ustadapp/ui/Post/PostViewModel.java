@@ -35,7 +35,6 @@ public class PostViewModel extends BaseViewModel<PostCallback> {
     }
 
 
-
     public void addPost(String title, String descriptoon, String category) {
         if (areFieldsValid(title, descriptoon, category)) {
             AddPostApiModel addPostApiModel = new AddPostApiModel();
@@ -207,6 +206,7 @@ public class PostViewModel extends BaseViewModel<PostCallback> {
                     }
                 }));
     }
+
     public void addComment(String text, int id) {
         getmCompositeDisposable().add(getmRequestHandler()
                 .addComment(id, text)
@@ -241,6 +241,7 @@ public class PostViewModel extends BaseViewModel<PostCallback> {
 
 
     }
+
     public void getPostsofUstad(int id) {
         getmCompositeDisposable().add(getmRequestHandler()
                 .getPostOfUstad(id)
@@ -256,6 +257,39 @@ public class PostViewModel extends BaseViewModel<PostCallback> {
                             return;
                         }
                         getmCallback().allposts(getPostResponseModel.getPostModel());
+
+                    }
+
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        if (NetworkUtils.isNetworkConnected(UstadApp.getInstance().getApplicationContext())) {
+                            getmCallback().ErrorOnAddPost("Check your internet connection");
+
+                        } else {
+                            getmCallback().ErrorOnAddPost("No Internet Connection");
+
+                        }
+
+                    }
+                }));
+    }
+
+    public void getPostById(int id) {
+        getmCompositeDisposable().add(getmRequestHandler()
+                .getPostById(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<OnePostResponseModel>() {
+                    @Override
+                    public void accept(OnePostResponseModel getPostResponseModel) throws Exception {
+                        if (getPostResponseModel == null) {
+                            getmCallback().ErrorOnAddPost("Not Available");
+                            return;
+                        } else if (getPostResponseModel.getError().getCode() == 302) {
+                            getmCallback().ErrorOnAddPost(getPostResponseModel.getError().getMessage());
+                            return;
+                        }
+                        getmCallback().onePostResponse(getPostResponseModel.getPostModel());
 
                     }
 

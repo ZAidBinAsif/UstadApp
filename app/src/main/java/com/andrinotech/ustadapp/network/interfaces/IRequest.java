@@ -5,6 +5,7 @@ import com.andrinotech.ustadapp.ui.Post.AddPostResponseModel;
 import com.andrinotech.ustadapp.ui.Post.AllPostResponseModel;
 import com.andrinotech.ustadapp.ui.Post.CommentResponseModel;
 import com.andrinotech.ustadapp.ui.Post.LikePostResponseModel;
+import com.andrinotech.ustadapp.ui.Post.OnePostResponseModel;
 import com.andrinotech.ustadapp.ui.login.AuthTocken;
 import com.andrinotech.ustadapp.ui.ChangePassword.ChangePasswordApiModel;
 import com.andrinotech.ustadapp.ui.login.MetaData;
@@ -44,6 +45,8 @@ public interface IRequest {
     Single<AllPostResponseModel> getAllPosts(AddPostApiModel addPostApiModel);
 
     Single<AllPostResponseModel> getPostOfUstad(int id);
+
+    Single<OnePostResponseModel> getPostById(int id);
 
     Single<AllPostResponseModel> getAllPosts();
 

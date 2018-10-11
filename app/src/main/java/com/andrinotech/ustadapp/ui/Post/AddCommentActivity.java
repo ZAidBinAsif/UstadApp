@@ -166,6 +166,11 @@ public class AddCommentActivity extends BaseActivity<PostViewModel> implements P
     }
 
     @Override
+    public void onePostResponse(PostModelResponse postModelResponses) {
+
+    }
+
+    @Override
     public void allcomments(ArrayList<Comment> postModelResponses) {
         if (postModelResponses.size() > 0) {
             progressComments.setVisibility(View.GONE);

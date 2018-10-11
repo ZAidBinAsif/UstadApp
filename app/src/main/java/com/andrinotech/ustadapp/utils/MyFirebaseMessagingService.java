@@ -10,9 +10,8 @@ import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
-
-import com.andrinotech.ustadapp.MainActivity;
 import com.andrinotech.ustadapp.R;
+import com.andrinotech.ustadapp.ui.Post.PostDetail;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -28,6 +27,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public static final String NOTIFICATION_CHANNEL_ID = "10001";
     private NotificationManager mNotificationManager;
     private NotificationCompat.Builder mBuilder;
+    private String postId;
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -43,6 +43,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             message = map.get("Message");
             title = map.get("Title");
             type = map.get("Type");
+            postId = map.get("PostId");
 
             handleNow(title, message);
             if (/* Check if data needs to be processed by long running job */ true) {
@@ -67,9 +68,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         /**Creates an explicit intent for an Activity in your app**/
         Intent resultIntent = null;
 
-        resultIntent = new Intent(this, MainActivity.class);
+        resultIntent = new Intent(this, PostDetail.class);
         resultIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
+        resultIntent.putExtra("postId", postId);
         PendingIntent resultPendingIntent = PendingIntent.getActivity(this,
                 0 /* Request code */, resultIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT);

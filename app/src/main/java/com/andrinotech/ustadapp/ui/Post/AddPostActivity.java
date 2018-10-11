@@ -187,6 +187,11 @@ public class AddPostActivity extends BaseActivity<PostViewModel> implements Post
     }
 
     @Override
+    public void onePostResponse(PostModelResponse postModelResponses) {
+
+    }
+
+    @Override
     public void allcomments(ArrayList<Comment> postModelResponses) {
 
     }

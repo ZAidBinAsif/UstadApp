@@ -46,16 +46,20 @@
 
         <activity android:name=".ui.forgotPassword.ForgotPasswordCodeActivity"></activity>
         <activity android:name=".ui.forgotPassword.ForgotPasswordActivity"></activity>
+
         <activity android:name=".ui.EditPassword.EditPasswordActvitiy"></activity>
+        <activity android:name=".ui.Post.PostDetail"></activity>
         <activity
             android:name=".ui.Post.AddCommentActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar"
+
             android:windowSoftInputMode="stateVisible|adjustResize"></activity>
         <service android:name=".utils.MyFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+
             </intent-filter>
         </service>
         <service android:name=".utils.MyFirebaseMessagingService">
