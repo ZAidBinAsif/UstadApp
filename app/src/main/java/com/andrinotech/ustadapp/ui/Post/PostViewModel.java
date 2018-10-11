@@ -7,6 +7,10 @@ import com.andrinotech.ustadapp.ui.base.BaseViewModel;
 import com.andrinotech.ustadapp.utils.NetworkUtils;
 import com.andrinotech.ustadapp.utils.StringUtils;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
@@ -33,7 +37,6 @@ public class PostViewModel extends BaseViewModel<PostCallback> {
 
         return isValid;
     }
-
 
 
     public void addPost(String title, String descriptoon, String category) {
@@ -156,7 +159,10 @@ public class PostViewModel extends BaseViewModel<PostCallback> {
                             getmCallback().ErrorOnAddPost(getPostResponseModel.getError().getMessage());
                             return;
                         }
-                        getmCallback().allposts(getPostResponseModel.getPostModel());
+                        ArrayList<PostModelResponse> postModelResponses = getPostResponseModel.getPostModel();
+                        Collections.reverse(postModelResponses);
+                        getmCallback().allposts(postModelResponses);
+//                        getmCallback().allposts(getPostResponseModel.getPostModel());
 
                     }
 
@@ -207,6 +213,7 @@ public class PostViewModel extends BaseViewModel<PostCallback> {
                     }
                 }));
     }
+
     public void addComment(String text, int id) {
         getmCompositeDisposable().add(getmRequestHandler()
                 .addComment(id, text)
@@ -241,6 +248,7 @@ public class PostViewModel extends BaseViewModel<PostCallback> {
 
 
     }
+
     public void getPostsofUstad(int id) {
         getmCompositeDisposable().add(getmRequestHandler()
                 .getPostOfUstad(id)
@@ -255,7 +263,9 @@ public class PostViewModel extends BaseViewModel<PostCallback> {
                             getmCallback().ErrorOnAddPost(getPostResponseModel.getError().getMessage());
                             return;
                         }
-                        getmCallback().allposts(getPostResponseModel.getPostModel());
+                        ArrayList<PostModelResponse> postModelResponses = getPostResponseModel.getPostModel();
+                       Collections.reverse(postModelResponses);
+                        getmCallback().allposts(postModelResponses);
 
                     }
 
