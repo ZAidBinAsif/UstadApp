@@ -1,5 +1,6 @@
 package com.andrinotech.ustadapp.data;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.andrinotech.ustadapp.UstadApp;
@@ -92,6 +93,26 @@ public class UserManager {
 
 //        this.user = null;
     }
+    public  void setFcmKey(String fcmKey){
+        preferenceSetter("fcmKey", fcmKey);
+    }
+    public static String getFcmKey() {
+        return preferenceGetter("fcmKey");
+    }
 
+    public  void preferenceSetter(String key, String value){
+        SharedPreferences pref = UstadApp.getInstance().getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString(key, value);
+        editor.apply();
+    }
+
+    public static String  preferenceGetter(String key){
+        SharedPreferences pref;
+        String value="";
+        pref = UstadApp.getInstance().getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
+        value = pref.getString(key, "");
+        return value;
+    }
 
 }
