@@ -96,7 +96,7 @@ public class ShowPostFragment extends BaseFragment<PostViewModel> implements Pos
     public void allposts(ArrayList<PostModelResponse> postModelResponses) {
         this.postModelResponses = postModelResponses;
         adapter = new PostAdapter(getContext(), postModelResponses, this);
-        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
+//        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         dismissDialog();
