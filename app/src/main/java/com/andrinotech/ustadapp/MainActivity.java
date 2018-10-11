@@ -1,3 +1,5 @@
+package com.andrinotech.ustadapp;
+
 import android.support.v7.app.AppCompatActivity;
 
 //package com.andrinotech.ustadapp;
