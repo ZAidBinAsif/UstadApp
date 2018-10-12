@@ -63,12 +63,12 @@ public class UstadProfileDetail extends AppCompatActivity {
         name.setText(ustad.getUstad().getName());
         status.setText(ustad.getUstad().getStatus());
         username.setText(ustad.getUstad().getUsername());
-        phone.setText(ustad.getUstad().getPhone());
+        phone.setText(ustad.getUstad().getPhone() == null ? "Not available" : ustad.getUstad().getPhone());
         email.setText(ustad.getUstad().getEmail());
-        category.setText(ustad.getCategory() == null ? "" : ustad.getCategory());
-        info.setText(ustad.getUstad().getInfo() == null ? "" : ustad.getUstad().getInfo());
-        skils.setText(ustad.getUstad().getSkils() == null ? "" : ustad.getUstad().getSkils());
-        String path = ustad.getUstad().getLogo() == null ? "" : ustad.getUstad().getLogo();
+        category.setText(ustad.getCategory() == null ? "Not available" : ustad.getCategory());
+        info.setText(ustad.getUstad().getInfo() == null ? "Not available" : ustad.getUstad().getInfo());
+        skils.setText(ustad.getUstad().getSkils() == null ? "Not available" : ustad.getUstad().getSkils());
+        String path = ustad.getUstad().getLogo() == null ? "Not available" : ustad.getUstad().getLogo();
         GlideHelper.loadImage(this, path, imageView_logo, R.drawable.ic_profile_plc);
 
     }

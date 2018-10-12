@@ -19,7 +19,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
@@ -80,19 +82,33 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int postition) {
-        final PostModelResponse model = arrayList.get(postition);
+        final PostModelResponse model = modellist.get(postition);
         Glide.with(mContext)
-                .load(arrayList.get(postition).getUstad().getLogo()).dontAnimate()
+                .load(modellist.get(postition).getUstad().getLogo()).dontAnimate()
                 .fitCenter()
                 .error(R.drawable.ic_profile_plc)
                 .placeholder(R.drawable.ic_profile_plc)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.imageView_logo);
+
         holder.category.setText(model.getCategory());
         holder.decription.setText(model.getText());
         holder.name.setText(model.getUstad().getName());
         holder.title.setText(model.getTitle());
-        holder.time.setText(DateUtils.convertMillisecondsToTime(model.getTime()));
+        String date;
+        Calendar cal1 = Calendar.getInstance();
+        cal1.setTimeInMillis(model.getTime() * 1000);
+        Calendar now = Calendar.getInstance();
+        if (android.text.format.DateUtils.isToday(model.getTime() * 1000)) {
+            date = "Today";
+        } else if (now.get(Calendar.DATE) - cal1.get(Calendar.DATE) == 1) {
+            date = "Yesterday";
+        } else {
+            String cTime = DateUtils.ConvertMilliSecondsToDate(model.getTime() * 1000);
+            date = cTime.trim();
+        }
+
+        holder.time.setText(DateUtils.convertMillisecondsToTime(model.getTime()) + " " + date);
 
         if (model.getLike() != null && model.getLike().getType().equalsIgnoreCase("like")) {
             holder.like.setImageResource(R.drawable.ic_thumb_like);
@@ -140,26 +156,28 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return arrayList.size();
+        return modellist.size();
     }
 
-//    //filter
-//    public void filter(String charText) {
-//        charText = charText.toLowerCase(Locale.getDefault());
-//        modellist.clear();
-//        if (charText.length() == 0) {
-//            modellist.addAll(arrayList);
-//        } else {
-//            for (LawModel model : arrayList) {
-//                //                    if(modelCategories.get(i).getCategory().contains(keyword)|| modelCategories.get(i).getCategoryname().contains(keyword)|| modelCategories.get(i).getCatdetails().contains(keyword)){
-//
-//                if (model.getTitle().toLowerCase(Locale.getDefault())
-//                        .contains(charText) || model.getDesc().toLowerCase(Locale.getDefault()).contains(charText)) {
-//                    modellist.add(model);
-//
-//                }
-//            }
-//        }
-//        notifyDataSetChanged();
-//    }
+    //filter
+    public void filter(String charText) {
+        charText = charText.toLowerCase(Locale.getDefault());
+        modellist.clear();
+        if (charText.length() == 0) {
+            modellist.addAll(arrayList);
+        } else {
+            for (PostModelResponse model : arrayList) {
+
+                if (model.getTitle().toLowerCase(Locale.getDefault())
+                        .contains(charText) || model.getUstad().getName().toLowerCase(Locale.getDefault()).contains(charText)
+                        || model.getUstad().getUsername().toLowerCase(Locale.getDefault()).contains(charText)
+                        || (model.getUstad().getCategory() != null && model.getUstad().getCategory().toLowerCase(Locale.getDefault()).contains(charText))
+                        || (model.getUstad().getSkils() != null && model.getUstad().getSkils().toLowerCase(Locale.getDefault()).contains(charText))) {
+                    modellist.add(model);
+
+                }
+            }
+        }
+        notifyDataSetChanged();
+    }
 }

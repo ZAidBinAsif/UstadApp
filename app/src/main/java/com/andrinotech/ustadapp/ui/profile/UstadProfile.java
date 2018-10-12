@@ -11,6 +11,7 @@ import com.andrinotech.ustadapp.HomeActivity;
 import com.andrinotech.ustadapp.R;
 import com.andrinotech.ustadapp.databinding.ProfilePageOfustadBinding;
 import com.andrinotech.ustadapp.helper.AVProgressDialog;
+import com.andrinotech.ustadapp.helper.DateUtils;
 import com.andrinotech.ustadapp.ui.Post.Comment;
 import com.andrinotech.ustadapp.ui.Post.LikePostResponseModel;
 import com.andrinotech.ustadapp.ui.Post.PostCallback;
@@ -21,8 +22,11 @@ import com.andrinotech.ustadapp.ui.base.BaseActivity;
 import com.andrinotech.ustadapp.utils.CommonUtils;
 import com.andrinotech.ustadapp.utils.GlideHelper;
 import com.andrinotech.ustadapp.utils.StringUtils;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class UstadProfile extends BaseActivity<PostViewModel> implements PostCallback, View.OnClickListener {
     private AVProgressDialog mLoadingDialog;
@@ -91,8 +95,9 @@ public class UstadProfile extends BaseActivity<PostViewModel> implements PostCal
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into(binding.image);
                 binding.name.setText(ustad.getUstad().getName());
-                binding.price.setText("Rs. " + ustad.getUstad().getPrice());
-                binding.categoryustad.setText(ustad.getCategory());
+                String price = ustad.getUstad().getPrice() == null ? " " : "Rs : " + ustad.getUstad().getPrice();
+                binding.price.setText(price);
+                binding.categoryustad.setText(ustad.getCategory() == null ? "" : ustad.getCategory());
                 binding.skilltext.setText(ustad.getUstad().getSkils());
                 binding.personaltext.setText(ustad.getUstad().getInfo());
                 binding.personalskill.setOnClickListener(new View.OnClickListener() {
@@ -163,20 +168,27 @@ public class UstadProfile extends BaseActivity<PostViewModel> implements PostCal
             final PostModelResponse model = postModelResponses.get(0);
             String path = ustad.getUstad().getLogo() == null ? "" : ustad.getUstad().getLogo();
 
-            GlideHelper.loadImage(this, path, binding.imageViewLogo, R.drawable.ic_profile_plc);
-
-//            Glide.with(this)
-//                    .load(postModelResponses.get(0).getUstad().getLogo())
-//                    .fitCenter()
-////                    .error(R.drawable.ic_profile_plc)
-////                    .placeholder(R.drawable.ic_profile_plc)
-//                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-//                    .into(binding.imageViewLogo);
-            binding.category.setText(model.getCategory());
+            GlideHelper.loadImage(this, "http://192.168.42.71/appserver/public/uploads/ustads/3054ce3851fc260e1e4191e06f4cab04.png", binding.imageViewLogo, R.drawable.ic_profile_plc);
+            binding.category.setText(model.getCategory() == null ? " " : model.getCategory());
             binding.decription.setText(model.getText());
             binding.postname.setText(model.getUstad().getName());
             binding.title.setText(model.getTitle());
             binding.status.setText(model.getUstad().getStatus());
+            String date;
+            Calendar cal1 = Calendar.getInstance();
+            cal1.setTimeInMillis(model.getTime() * 1000);
+            Calendar now = Calendar.getInstance();
+            if (android.text.format.DateUtils.isToday(model.getTime() * 1000)) {
+                date = "Today";
+            } else if (now.get(Calendar.DATE) - cal1.get(Calendar.DATE) == 1) {
+                date = "Yesterday";
+            } else {
+                String cTime = DateUtils.ConvertMilliSecondsToDate(model.getTime() * 1000);
+                date = cTime.trim();
+            }
+
+            binding.time.setText(DateUtils.convertMillisecondsToTime(model.getTime()) + " " + date);
+
             binding.view9.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

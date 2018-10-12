@@ -38,7 +38,7 @@ public class DateUtils {
 
     public static String convertMillisecondsToTime(Long milliseconds) {
         Calendar cl = Calendar.getInstance();
-        cl.setTimeInMillis(milliseconds);
+        cl.setTimeInMillis(milliseconds*1000);
         String date = "" + cl.get(Calendar.DAY_OF_MONTH) + ":" + cl.get(Calendar.MONTH) + ":" + cl.get(Calendar.YEAR);
         String time = "";
         int hours = cl.get(Calendar.HOUR_OF_DAY);

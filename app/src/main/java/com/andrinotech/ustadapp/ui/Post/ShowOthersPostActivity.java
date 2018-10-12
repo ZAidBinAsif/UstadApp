@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.andrinotech.ustadapp.R;
-import com.andrinotech.ustadapp.data.UserManager;
 import com.andrinotech.ustadapp.helper.AVProgressDialog;
 import com.andrinotech.ustadapp.ui.base.BaseActivity;
 import com.andrinotech.ustadapp.utils.CommonUtils;
@@ -27,6 +26,7 @@ public class ShowOthersPostActivity extends BaseActivity<PostViewModel> implemen
     private RecyclerView recyclerView;
     private ArrayList<PostModelResponse> postModelResponses = new ArrayList<>();
     private PostModelResponse ustad;
+    private TextView text;
 
 
     private void dismissDialog() {
@@ -36,13 +36,14 @@ public class ShowOthersPostActivity extends BaseActivity<PostViewModel> implemen
 
     @Override
     public int getLayout() {
-        return R.layout.fragment_news_feed;
+        return R.layout.fragment_othersnews_feed;
     }
 
     @Override
     public PostViewModel initViewModel() {
         return new PostViewModel();
     }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,11 +111,13 @@ public class ShowOthersPostActivity extends BaseActivity<PostViewModel> implemen
     @Override
     public void initViews() {
         emptyview = findViewById(R.id.emptyview);
-        mLoadingDialog=new AVProgressDialog(this);
+        mLoadingDialog = new AVProgressDialog(this);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new PostAdapter(this, new ArrayList<PostModelResponse>(), this);
         recyclerView.setAdapter(adapter);
+        text = findViewById(R.id.text);
+
         getPosts();
     }
 
@@ -127,6 +130,7 @@ public class ShowOthersPostActivity extends BaseActivity<PostViewModel> implemen
             if (ustad == null) {
                 finish();
             } else {
+                text.setText("Posts of " + ustad.getUstad().getName());
 
                 getViewModel().getPostsofUstad(Integer.parseInt(ustad.getUstad().getId()));
             }

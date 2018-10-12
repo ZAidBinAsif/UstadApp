@@ -89,7 +89,7 @@
             android:layout_marginRight="7dp"
             android:layout_marginTop="8dp"
 
-            android:text="10 minute agi"
+            android:text=""
             android:textColor="@color/colorEditTextHint"
             android:textSize="12sp" />
 

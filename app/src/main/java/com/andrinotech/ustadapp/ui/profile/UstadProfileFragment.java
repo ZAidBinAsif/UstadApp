@@ -27,6 +27,7 @@ public class UstadProfileFragment extends Fragment implements View.OnClickListen
 
     TextView name, username, phone, email, category, info, skils, changepasword, editprofile;
     ImageView imageView_logo;
+    private TextView status;
 
     @Nullable
     @Override
@@ -43,6 +44,8 @@ public class UstadProfileFragment extends Fragment implements View.OnClickListen
         changepasword = view.findViewById(R.id.changepasword);
         editprofile = view.findViewById(R.id.editprofile);
         editprofile.setOnClickListener(this);
+        status = view.findViewById(R.id.status);
+
         changepasword.setOnClickListener(this);
         setData();
         return view;
@@ -61,11 +64,12 @@ public class UstadProfileFragment extends Fragment implements View.OnClickListen
         username.setText(user.getUsername());
         phone.setText(user.getPhone());
         email.setText(user.getEmail());
-        category.setText(user.getCategory() == null ? "" : user.getCategory());
-        info.setText(user.getInfo() == null ? "" : user.getInfo());
-        skils.setText(user.getSkils() == null ? "" : user.getSkils());
-        String path = user.getLogo() == null ? "" : user.getLogo();
+        category.setText(user.getCategory() == null ? " " : user.getCategory());
+        info.setText(user.getInfo() == null ? " " : user.getInfo());
+        skils.setText(user.getSkils() == null ? " " : user.getSkils());
+        String path = user.getLogo() == null ? " " : user.getLogo();
         GlideHelper.loadImage(getContext(), path, imageView_logo, R.drawable.ic_profile_plc);
+        status.setText(user.getStatus());
 
     }
 

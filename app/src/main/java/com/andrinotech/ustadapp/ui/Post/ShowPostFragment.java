@@ -2,12 +2,12 @@ package com.andrinotech.ustadapp.ui.Post;
 
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.graphics.Color;
+import android.app.SearchManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.DividerItemDecoration;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -18,8 +18,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
 import com.andrinotech.ustadapp.HomeActivity;
@@ -28,6 +27,7 @@ import com.andrinotech.ustadapp.helper.AVProgressDialog;
 import com.andrinotech.ustadapp.ui.base.BaseFragment;
 import com.andrinotech.ustadapp.utils.CommonUtils;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 
@@ -161,7 +161,7 @@ public class ShowPostFragment extends BaseFragment<PostViewModel> implements Pos
     @Override
     public void onResume() {
         super.onResume();
-//        getPosts();
+        getPosts();
     }
 
     @Override
@@ -169,25 +169,70 @@ public class ShowPostFragment extends BaseFragment<PostViewModel> implements Pos
         super.onCreateOptionsMenu(menu, inflater);
 
         inflater.inflate(R.menu.post_fragment_menu, menu);
-        MenuItem mSearch = menu.findItem(R.id.action_search);
-        SearchView mSearchView = (SearchView) mSearch.getActionView();
-        mSearchView.setQueryHint("Search");
-        EditText searchEditText = (EditText) mSearchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
-        searchEditText.setTextColor(getResources().getColor(R.color.white));
-        searchEditText.setHintTextColor(getResources().getColor(R.color.white));
-        ImageView icon = mSearchView.findViewById(android.support.v7.appcompat.R.id.search_button);
-        ImageView icon1 = mSearchView.findViewById(android.support.v7.appcompat.R.id.search_close_btn);
-//        ImageView icon2 = mSearchView.findViewById(android.support.v7.appcompat.R.id.sea);
+//        MenuItem mSearch = menu.findItem(R.id.action_search);
+//        SearchView mSearchView = (SearchView) mSearch.getActionView();
+//        mSearchView.setQueryHint("Search");
+//        EditText searchEditText = (EditText) mSearchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+//        searchEditText.setTextColor(getResources().getColor(R.color.white));
+//        searchEditText.setHintTextColor(getResources().getColor(R.color.white));
+//        ImageView icon = mSearchView.findViewById(android.support.v7.appcompat.R.id.search_button);
+//        ImageView icon1 = mSearchView.findViewById(android.support.v7.appcompat.R.id.search_close_btn);
+////        ImageView icon2 = mSearchView.findViewById(android.support.v7.appcompat.R.id.sea);
+//
+//        icon.setColorFilter(Color.WHITE);
+//        icon1.setColorFilter(Color.WHITE);
+//
+//        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                return true;
+//            }
+//        });
 
-        icon.setColorFilter(Color.WHITE);
-        icon1.setColorFilter(Color.WHITE);
-        mSearchView.setOnSearchClickListener(new View.OnClickListener() {
+
+
+        final MenuItem itemm = menu.findItem(R.id.actionsearch);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(itemm);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText)
+            {
+                adapter.filter(newText);
+                return false;
+            }
+        });
+        SearchManager manager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+        SearchView search = (SearchView) menu.findItem(R.id.actionsearch).getActionView();
+        search.setSearchableInfo(manager.getSearchableInfo(getActivity().getComponentName()));
+        AutoCompleteTextView searchTextView = (AutoCompleteTextView) search.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+        try {
+            searchTextView.setTextColor(getResources().getColor(R.color.white));
+            searchTextView.setHintTextColor(getResources().getColor(R.color.white));
+
+            Field mCursorDrawableRes = TextView.class.getDeclaredField("mCursorDrawableRes");
+            mCursorDrawableRes.setAccessible(true);
+            mCursorDrawableRes.set(searchTextView, R.drawable.cursor); //This sets the cursor resource ID to 0 or @null which will make it visible on white background
+        } catch (Exception e) {
+        }
+        searchView.setQueryHint("Type something...");
+        searchView.setOnSearchClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ((HomeActivity)getActivity()).showHideText(true);
             }
         });
-        mSearchView.setOnCloseListener(new SearchView.OnCloseListener() {
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
             public boolean onClose() {
                 ((HomeActivity)getActivity()).showHideText(false);
@@ -196,18 +241,6 @@ public class ShowPostFragment extends BaseFragment<PostViewModel> implements Pos
             }
         });
 
-        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return true;
-            }
-        });
     }
 
 
