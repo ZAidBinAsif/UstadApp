@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
+import com.andrinotech.ustadapp.HomeActivity;
 import com.andrinotech.ustadapp.R;
 import com.andrinotech.ustadapp.databinding.ProfilePageOfustadBinding;
 import com.andrinotech.ustadapp.helper.AVProgressDialog;
@@ -82,7 +83,13 @@ public class UstadProfile extends BaseActivity<PostViewModel> implements PostCal
                 finish();
             } else {
                 getViewModel().getPostsofUstad(Integer.parseInt(ustad.getUstad().getId()));
-
+                Glide.with(this)
+                        .load(ustad.getUstad().getLogo())
+                        .fitCenter()
+                        .error(R.drawable.ic_profile_plc)
+                        .placeholder(R.drawable.ic_profile_plc)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(binding.image);
                 binding.name.setText(ustad.getUstad().getName());
                 binding.price.setText("Rs. " + ustad.getUstad().getPrice());
                 binding.categoryustad.setText(ustad.getCategory());
@@ -102,6 +109,14 @@ public class UstadProfile extends BaseActivity<PostViewModel> implements PostCal
                         Intent intent = new Intent(UstadProfile.this, UstadProfileDetail.class);
                         intent.putExtra("ustad", StringUtils.getGson().toJson(ustad));
                         startActivity(intent);
+                    }
+                });
+                binding.backBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(UstadProfile.this, HomeActivity.class);
+                        startActivity(intent);
+                        finish();
                     }
                 });
             }

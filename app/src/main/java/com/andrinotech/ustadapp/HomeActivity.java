@@ -10,10 +10,15 @@ import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.andrinotech.ustadapp.FragNav.FragNavController;
 import com.andrinotech.ustadapp.ui.Post.AddPostActivity;
@@ -29,6 +34,7 @@ public class HomeActivity extends BaseActivity<tempViewModel> implements FragNav
     private final int FRAG_FEED = FragNavController.TAB1;
     private final int FRAG_ACCOUNT = FragNavController.TAB2;
     private FloatingActionButton addPost;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +42,8 @@ public class HomeActivity extends BaseActivity<tempViewModel> implements FragNav
         setContentView(R.layout.activity_local_feeds);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN | WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         initViews();
+        this.setTitle("");
+        setSupportActionBar(toolbar);
         initData(savedInstanceState);
     }
 
@@ -49,8 +57,10 @@ public class HomeActivity extends BaseActivity<tempViewModel> implements FragNav
         return new tempViewModel();
     }
 
+    @SuppressLint("WrongViewCast")
     private void initViews() {
         mnav_bottomBar = (BottomNavigationView) findViewById(R.id.nav_bottomBar);
+        toolbar=findViewById(R.id.toolbar);
         addPost = (FloatingActionButton) findViewById(R.id.fabChat);
         addPost.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,4 +161,78 @@ public class HomeActivity extends BaseActivity<tempViewModel> implements FragNav
         }
         throw new IllegalStateException("");
     }
+
+    public void showHideText(boolean a){
+        TextView text=findViewById(R.id.text);
+        if(a){
+            text.setVisibility(View.GONE);
+        }else{
+            text.setVisibility(View.VISIBLE);
+        }
+    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//
+//        getMenuInflater().inflate(R.menu.post_fragment_menu, menu);
+//        MenuItem mSearch = menu.findItem(R.id.action_search);
+//        SearchView mSearchView = (SearchView) mSearch.getActionView();
+//        mSearchView.setQueryHint("Search");
+//        mSearchView.setOnSearchClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                app_logo.setVisibility(View.GONE);
+//
+//            }
+//        });
+//        mSearchView.setOnCloseListener(new SearchView.OnCloseListener() {
+//            @Override
+//            public boolean onClose() {
+////                app_logo.setVisibility(View.VISIBLE);
+//
+//                return false;
+//            }
+//        });
+//
+//        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+////                Intent intent = new Intent(MainActivity.this, SearchResults.class);
+////                intent.putExtra("searchTerm", query);
+////                intent.putExtra("minPrice", 0);
+////                intent.putExtra("maxPrice", 9999999L);
+////                intent.putExtra("location", SharedPrefs.getUserCity());
+////                intent.putExtra("category", "All Brands");
+////                startActivity(intent);
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+////                mAdapter.getFilter().filter(newText);
+////                Toast.makeText(MainActivity.this, ""+newText, Toast.LENGTH_SHORT).show();
+//                return true;
+//            }
+//        });
+//        return true;
+//
+//
+//    }
+//
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+////        if (id == R.id.action_settings) {
+////
+////            return true;
+////        }
+//
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 }

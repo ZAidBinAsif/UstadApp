@@ -2,15 +2,24 @@ package com.andrinotech.ustadapp.ui.Post;
 
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.andrinotech.ustadapp.HomeActivity;
@@ -27,6 +36,9 @@ public class ShowPostFragment extends BaseFragment<PostViewModel> implements Pos
     private AVProgressDialog mLoadingDialog;
     PostAdapter adapter;
     TextView emptyview;
+    Toolbar toolbar;
+    TextView title;
+    TextView name;
     private RecyclerView recyclerView;
     private ArrayList<PostModelResponse> postModelResponses = new ArrayList<>();
 
@@ -38,6 +50,7 @@ public class ShowPostFragment extends BaseFragment<PostViewModel> implements Pos
         getViewModel().setCallBack(this);
         mLoadingDialog = new AVProgressDialog(getContext());
         initViews();
+        setHasOptionsMenu(true);
         return mRootView;
     }
 
@@ -57,7 +70,8 @@ public class ShowPostFragment extends BaseFragment<PostViewModel> implements Pos
     }
 
     @Override
-    public void ValidationError(PostViewModel.validationEnum validationEnum) {}
+    public void ValidationError(PostViewModel.validationEnum validationEnum) {
+    }
 
     @Override
     public void SuccessFullyAdded() {
@@ -114,6 +128,7 @@ public class ShowPostFragment extends BaseFragment<PostViewModel> implements Pos
     @Override
     public void initViews() {
         emptyview = mRootView.findViewById(R.id.emptyview);
+        name=mRootView.findViewById(R.id.text);
         recyclerView = (RecyclerView) mRootView.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new PostAdapter(getContext(), new ArrayList<PostModelResponse>(), this);
@@ -147,5 +162,70 @@ public class ShowPostFragment extends BaseFragment<PostViewModel> implements Pos
     public void onResume() {
         super.onResume();
 //        getPosts();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+
+        inflater.inflate(R.menu.post_fragment_menu, menu);
+        MenuItem mSearch = menu.findItem(R.id.action_search);
+        SearchView mSearchView = (SearchView) mSearch.getActionView();
+        mSearchView.setQueryHint("Search");
+        EditText searchEditText = (EditText) mSearchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+        searchEditText.setTextColor(getResources().getColor(R.color.white));
+        searchEditText.setHintTextColor(getResources().getColor(R.color.white));
+        ImageView icon = mSearchView.findViewById(android.support.v7.appcompat.R.id.search_button);
+        ImageView icon1 = mSearchView.findViewById(android.support.v7.appcompat.R.id.search_close_btn);
+//        ImageView icon2 = mSearchView.findViewById(android.support.v7.appcompat.R.id.sea);
+
+        icon.setColorFilter(Color.WHITE);
+        icon1.setColorFilter(Color.WHITE);
+        mSearchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((HomeActivity)getActivity()).showHideText(true);
+            }
+        });
+        mSearchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                ((HomeActivity)getActivity()).showHideText(false);
+
+                return false;
+            }
+        });
+
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return true;
+            }
+        });
+    }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//
+//            return true;
+//        }
+
+
+        return super.onOptionsItemSelected(item);
     }
 }
