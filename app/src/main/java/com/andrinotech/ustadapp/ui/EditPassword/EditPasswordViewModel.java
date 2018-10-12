@@ -31,7 +31,8 @@ public class EditPasswordViewModel extends BaseViewModel<EditPasswordCallback> {
             getmCallback().inValidPassword("confirm password Password Required.");
             isValid = false;
         }
-        if (StringUtils.passwordMatches(pasword, confirmpassword)) {
+        if (!
+                StringUtils.passwordMatches(pasword, confirmpassword)) {
             getmCallback().inValidPassword("Password and Confirm Password does not match.");
             isValid = false;
         }
@@ -52,7 +53,7 @@ public class EditPasswordViewModel extends BaseViewModel<EditPasswordCallback> {
                             if (metaData == null) {
                                 getmCallback().showError("Not Available", "");
                                 return;
-                            } else if (metaData.getError() != null) {
+                            } else if (metaData.getError() == null) {
                                 getmCallback().showError(metaData.getError().getMessage(), "login");
                                 return;
                             }

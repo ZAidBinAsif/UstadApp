@@ -8,6 +8,7 @@ import android.support.design.widget.TextInputLayout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.andrinotech.ustadapp.HomeActivity;
@@ -20,7 +21,7 @@ import com.andrinotech.ustadapp.utils.CommonUtils;
 public class RegisterUserActivity extends BaseActivity<RegisterViewModel> implements RegisterUserCallBack, View.OnClickListener {
     private EditText et_name, et_username, et_email, et_password;
     TextView signIn;
-    Button signUp;
+    LinearLayout btn_signUplayout;
     TextInputLayout inputfullname, input_email, input_usrname, input_password;
     private AVProgressDialog mLoadingDialog;
 
@@ -52,9 +53,9 @@ public class RegisterUserActivity extends BaseActivity<RegisterViewModel> implem
         et_username = findViewById(R.id.et_username);
         et_email = findViewById(R.id.et_email);
         et_password = findViewById(R.id.et_password);
-        signUp = findViewById(R.id.btn_signUp);
+        btn_signUplayout = findViewById(R.id.btn_signUplayout);
         signIn = findViewById(R.id.signIn);
-        signUp.setOnClickListener(this);
+        btn_signUplayout.setOnClickListener(this);
         signIn.setOnClickListener(this);
         mLoadingDialog = new AVProgressDialog(this);
 
@@ -63,7 +64,7 @@ public class RegisterUserActivity extends BaseActivity<RegisterViewModel> implem
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btn_signUp:
+            case R.id.btn_signUplayout:
                 register();
                 break;
             case R.id.signIn:

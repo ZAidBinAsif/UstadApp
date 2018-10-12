@@ -85,6 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
+            android:id="@+id/loginlayout"
             android:layout_marginTop="32dp"
             android:background="@drawable/round_btn_corner"
 
@@ -100,10 +101,9 @@
                 android:id="@+id/btn_signIn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/round_btn_corner"
+                android:background="@null"
 
                 android:text="Sign In"
-
                 android:textColor="#fff"
                 android:textSize="16sp" />
 

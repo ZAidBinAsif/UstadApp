@@ -15,15 +15,13 @@ import com.andrinotech.ustadapp.ui.Post.LikePostResponseModel;
 import com.andrinotech.ustadapp.ui.Post.PostCallback;
 import com.andrinotech.ustadapp.ui.Post.PostModelResponse;
 import com.andrinotech.ustadapp.ui.Post.PostViewModel;
+import com.andrinotech.ustadapp.ui.Post.ShowOthersPostActivity;
 import com.andrinotech.ustadapp.ui.base.BaseActivity;
 import com.andrinotech.ustadapp.utils.CommonUtils;
 import com.andrinotech.ustadapp.utils.GlideHelper;
 import com.andrinotech.ustadapp.utils.StringUtils;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class UstadProfile extends BaseActivity<PostViewModel> implements PostCallback, View.OnClickListener {
     private AVProgressDialog mLoadingDialog;
@@ -167,7 +165,7 @@ public class UstadProfile extends BaseActivity<PostViewModel> implements PostCal
             binding.view9.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(UstadProfile.this, UstadProfileDetail.class);
+                    Intent intent = new Intent(UstadProfile.this, ShowOthersPostActivity.class);
                     intent.putExtra("ustad", StringUtils.getGson().toJson(ustad));
                     startActivity(intent);
                 }

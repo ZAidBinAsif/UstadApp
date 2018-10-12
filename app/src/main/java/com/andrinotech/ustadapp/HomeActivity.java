@@ -27,10 +27,7 @@ import java.lang.reflect.Field;
 public class HomeActivity extends BaseActivity<tempViewModel> implements FragNavController.TransactionListener, FragNavController.RootFragmentListener {
     private BottomNavigationView mnav_bottomBar;
     private final int FRAG_FEED = FragNavController.TAB1;
-    private final int FRAG_MAP = FragNavController.TAB2;
-    private final int FRAG_FRIEND = FragNavController.TAB3;
-    private final int FRAG_TRENDING = FragNavController.TAB4;
-    private final int FRAG_ME = FragNavController.TAB5;
+    private final int FRAG_ACCOUNT = FragNavController.TAB2;
     private FloatingActionButton addPost;
 
     @Override
@@ -108,14 +105,10 @@ public class HomeActivity extends BaseActivity<tempViewModel> implements FragNav
 
                         replaceFragment(FRAG_FEED);
                         return true;
-                    case R.id.nav_order:
-                        addPost.setVisibility(View.GONE);
-
-                        replaceFragment(FRAG_FRIEND);
-                        return true;
                     case R.id.nav_account:
                         addPost.setVisibility(View.GONE);
-                        replaceFragment(FRAG_TRENDING);
+
+                        replaceFragment(FRAG_ACCOUNT);
                         return true;
                     default:
                         return true;
@@ -143,7 +136,7 @@ public class HomeActivity extends BaseActivity<tempViewModel> implements FragNav
     public void setProfileFragment() {
         mnav_bottomBar.setSelectedItemId(R.id.nav_account);
 
-        replaceFragment(FRAG_TRENDING);
+        replaceFragment(FRAG_ACCOUNT);
     }
 
     @Override
@@ -152,13 +145,8 @@ public class HomeActivity extends BaseActivity<tempViewModel> implements FragNav
             case FRAG_FEED:
                 addPost.setVisibility(View.VISIBLE);
                 return new ShowPostFragment();
-            case FRAG_TRENDING:
+            case FRAG_ACCOUNT:
                 addPost.setVisibility(View.GONE);
-
-                return new UstadProfileFragment();
-            case FRAG_FRIEND:
-                addPost.setVisibility(View.GONE);
-
                 return new UstadProfileFragment();
         }
         throw new IllegalStateException("");

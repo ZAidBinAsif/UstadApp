@@ -8,6 +8,7 @@ import android.support.design.widget.TextInputLayout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.andrinotech.ustadapp.data.UserManager;
@@ -21,7 +22,8 @@ import com.andrinotech.ustadapp.utils.CommonUtils;
 
 public class LoginActivity extends BaseActivity<LoginViewModel> implements LoginCallback, View.OnClickListener {
     private EditText et_email, et_password;
-    private TextView tv_forogotpassword, btn_signUp;
+    private TextView tv_forogotpassword,signup;
+    LinearLayout loginlayout;
     private Button btn_signIn;
     TextInputLayout inputfullname,input_email,input_usrname,input_password;
 
@@ -53,14 +55,14 @@ public class LoginActivity extends BaseActivity<LoginViewModel> implements Login
     public void initViews() {
         et_email = findViewById(R.id.et_email);
         et_password = findViewById(R.id.et_password);
-        btn_signIn = findViewById(R.id.btn_signIn);
+        signup = findViewById(R.id.signup);
         input_email = findViewById(R.id.inputemail);
         input_password = findViewById(R.id.inputpassword);
 
         tv_forogotpassword = findViewById(R.id.tv_forogotpassword);
-        btn_signUp = findViewById(R.id.signup);
-        btn_signIn.setOnClickListener(this);
-        btn_signUp.setOnClickListener(this);
+        loginlayout = findViewById(R.id.loginlayout);
+        signup.setOnClickListener(this);
+        loginlayout.setOnClickListener(this);
         tv_forogotpassword.setOnClickListener(this);
 
     }
@@ -68,7 +70,7 @@ public class LoginActivity extends BaseActivity<LoginViewModel> implements Login
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btn_signIn:
+            case R.id.loginlayout:
                 login();
                 break;
             case R.id.signup:

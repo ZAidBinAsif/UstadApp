@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+
     android:layout_height="match_parent">
 
     <android.support.design.widget.BottomNavigationView
@@ -9,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
         android:layout_alignParentStart="true"
         app:itemBackground="@color/colorPrimary"
         app:itemIconTint="@drawable/nav_item_colors"

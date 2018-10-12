@@ -6,7 +6,7 @@ package com.andrinotech.ustadapp.utils;
 
 public class Config {
 
-    public final static String BASE_URL = "http://172.29.27.84/android/public/api/";
+    public final static String BASE_URL = "http://192.168.42.71/appserver/public/api/";
 
     public class Api {
         public final static String SignIn = BASE_URL + "ustad/login?email={email}&password={password}";

@@ -49,6 +49,7 @@
 
         <activity android:name=".ui.EditPassword.EditPasswordActvitiy"></activity>
         <activity android:name=".ui.Post.PostDetail"></activity>
+        <activity android:name=".ui.Post.ShowOthersPostActivity"></activity>
         <activity
             android:name=".ui.Post.AddCommentActivity"
             android:configChanges="orientation|screenSize"
