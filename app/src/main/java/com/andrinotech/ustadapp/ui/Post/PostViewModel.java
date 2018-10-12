@@ -283,4 +283,37 @@ public class PostViewModel extends BaseViewModel<PostCallback> {
                     }
                 }));
     }
+
+    public void getPostById(int id) {
+        getmCompositeDisposable().add(getmRequestHandler()
+                .getPostById(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<OnePostResponseModel>() {
+                    @Override
+                    public void accept(OnePostResponseModel getPostResponseModel) throws Exception {
+                        if (getPostResponseModel == null) {
+                            getmCallback().ErrorOnAddPost("Not Available");
+                            return;
+                        } else if (getPostResponseModel.getError().getCode() == 302) {
+                            getmCallback().ErrorOnAddPost(getPostResponseModel.getError().getMessage());
+                            return;
+                        }
+                        getmCallback().onePostResponse(getPostResponseModel.getPostModel());
+
+                    }
+
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        if (NetworkUtils.isNetworkConnected(UstadApp.getInstance().getApplicationContext())) {
+                            getmCallback().ErrorOnAddPost("Check your internet connection");
+
+                        } else {
+                            getmCallback().ErrorOnAddPost("No Internet Connection");
+
+                        }
+
+                    }
+                }));
+    }
 }

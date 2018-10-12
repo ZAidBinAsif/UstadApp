@@ -117,6 +117,11 @@ public class ShowPostFragment extends BaseFragment<PostViewModel> implements Pos
     }
 
     @Override
+    public void onePostResponse(PostModelResponse postModelResponses) {
+
+    }
+
+    @Override
     public void allcomments(ArrayList<Comment> postModelResponses) {
     }
 

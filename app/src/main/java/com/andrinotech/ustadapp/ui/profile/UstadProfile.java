@@ -193,6 +193,11 @@ public class UstadProfile extends BaseActivity<PostViewModel> implements PostCal
     }
 
     @Override
+    public void onePostResponse(PostModelResponse postModelResponses) {
+
+    }
+
+    @Override
     public void allcomments(ArrayList<Comment> postModelResponses) {
 
     }

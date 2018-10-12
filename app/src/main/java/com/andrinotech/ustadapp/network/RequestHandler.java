@@ -9,6 +9,7 @@ import com.andrinotech.ustadapp.ui.Post.AddPostResponseModel;
 import com.andrinotech.ustadapp.ui.Post.AllPostResponseModel;
 import com.andrinotech.ustadapp.ui.Post.CommentResponseModel;
 import com.andrinotech.ustadapp.ui.Post.LikePostResponseModel;
+import com.andrinotech.ustadapp.ui.Post.OnePostResponseModel;
 import com.andrinotech.ustadapp.ui.forgotPassword.ForgotPasswordApiModel;
 import com.andrinotech.ustadapp.ui.login.AuthTocken;
 import com.andrinotech.ustadapp.ui.login.MetaData;
@@ -173,12 +174,24 @@ public class RequestHandler implements IRequest {
 
         Rx2ANRequest.PostRequestBuilder postRequestBuilder = new Rx2ANRequest.PostRequestBuilder(Config.Api.getAllPostsUstad);
         postRequestBuilder.addBodyParameter("userId", UserManager.getInstance().getMetaData().getUser().getId());
-        postRequestBuilder.addBodyParameter("userType", "student");
+        postRequestBuilder.addBodyParameter("userType", "ustad");
         postRequestBuilder.addBodyParameter("ustadId", String.valueOf(id));
 
         return postRequestBuilder.build().getObjectSingle(AllPostResponseModel.class);
 
     }
+    @Override
+    public Single<OnePostResponseModel> getPostById(int id) {
+
+        Rx2ANRequest.PostRequestBuilder postRequestBuilder = new Rx2ANRequest.PostRequestBuilder(Config.Api.getPostById);
+        postRequestBuilder.addBodyParameter("userId", UserManager.getInstance().getMetaData().getUser().getId());
+        postRequestBuilder.addBodyParameter("userType", "ustad");
+        postRequestBuilder.addBodyParameter("ustadId", String.valueOf(id));
+
+        return postRequestBuilder.build().getObjectSingle(OnePostResponseModel.class);
+
+    }
+
 
     @Override
     public Single<AllPostResponseModel> getAllPosts() {
