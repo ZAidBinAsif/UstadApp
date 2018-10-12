@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginBottom="5dp"
+    android:layout_marginTop="1dp"
     android:background="@color/white"
-    android:elevation="4dp"
-    android:padding="4dp"
-
-    >
+    app:cardCornerRadius="1dp"
+    android:elevation="0dp"
+    android:padding="4dp">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -22,6 +22,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="5dp"
+            android:padding="5dp"
             android:src="@drawable/ic_profile_plc" />
 
 
@@ -30,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="7dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="5dp"
             android:layout_toRightOf="@+id/imageView_logo"
             android:text="hafiz Zaid Asif"
             android:textColor="@color/black"
@@ -114,14 +115,13 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="8dp"
-            android:background="@color/colorEditTextHint"></View>
+            android:background="#ececec"></View>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/view"
 
-            android:layout_marginBottom="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="3dp">
@@ -131,6 +131,7 @@
                 android:id="@+id/comment"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:padding="5dp"
                 android:src="@drawable/commenticon" />
 
             <ImageView
@@ -138,6 +139,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_alignParentEnd="true"
+                android:padding="5dp"
                 android:src="@drawable/ic_thumb" />
 
             <TextView
@@ -148,7 +150,7 @@
                 android:layout_marginRight="5dp"
                 android:layout_toLeftOf="@+id/like"
                 android:text=""
-                android:textSize="16sp"
+                android:textSize="13sp"
                 android:textStyle="bold" />
 
             <ImageView
@@ -157,6 +159,7 @@
                 android:layout_height="30dp"
                 android:layout_marginRight="5dp"
                 android:layout_toLeftOf="@+id/totallike"
+                android:padding="5dp"
                 android:src="@drawable/ic_unlike" />
 
             <TextView
@@ -167,8 +170,8 @@
                 android:layout_marginRight="5dp"
                 android:layout_toLeftOf="@+id/unlike"
                 android:text=""
-                android:textSize="16sp"
+                android:textSize="13sp"
                 android:textStyle="bold" />
         </RelativeLayout>
     </RelativeLayout>
-</android.support.v7.widget.CardView>
+</RelativeLayout>

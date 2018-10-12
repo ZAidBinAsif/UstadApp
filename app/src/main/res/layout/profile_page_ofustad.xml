@@ -15,23 +15,24 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/colorPrimaryDark"
+                android:background="@color/colorPrimary"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="30dp"
+                    android:padding="5dp"
+                    android:id="@+id/backBtn"
                     android:layout_height="30dp"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="20dp"
                     android:src="@drawable/back" />
 
                 <TextView
                     android:id="@+id/edit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="15dp"
                     android:text="Profile"
+                    android:layout_marginLeft="10dp"
                     android:textColor="@color/white"
                     android:textSize="18sp" />
 
@@ -49,9 +50,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/image"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="5dp"
                 android:text="asdasd"
+                android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <RelativeLayout
@@ -72,7 +74,7 @@
                         android:layout_width="15dp"
                         android:layout_height="15dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginLeft="20dp"
                         android:src="@drawable/cat" />
 
                     <TextView
@@ -81,7 +83,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:text="asdasd"
-                        android:textSize="16sp" />
+                        android:textSize="11sp" />
                 </LinearLayout>
 
                 <TextView
@@ -89,8 +91,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/category_layoutustad"
-                    android:layout_marginLeft="10dp"
-                    android:text="Rs"
+                    android:layout_marginLeft="20dp"
+                    android:text="Rs 5000"
 
                     android:textSize="16sp" />
 
@@ -147,10 +149,9 @@
                     android:id="@+id/skillhead"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/view1"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="30dp"
-                    android:layout_toRightOf="@+id/skillimage"
+                    android:layout_alignTop="@+id/skillimage"
+                    android:layout_marginStart="20dp"
+                    android:layout_toEndOf="@+id/skillimage"
                     android:text="Skills"
                     android:textColor="@color/black"
                     android:textSize="16sp"
@@ -159,12 +160,10 @@
                 <TextView
                     android:id="@+id/skilltext"
                     android:layout_width="wrap_content"
+                    android:layout_marginRight="20dp"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/skillhead"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginRight="3dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_toRightOf="@+id/skillimage"
+                    android:layout_alignStart="@+id/skillhead"
+                    android:layout_below="@+id/skillimage"
                     android:text="Skillsnbasdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
                     android:textColor="@color/black"
                     android:textSize="13sp" />
@@ -186,7 +185,7 @@
                     android:layout_marginLeft="40dp"
                     android:layout_marginRight="3dp"
                     android:layout_marginTop="10dp"
-                    android:text="Read More"
+                    android:text="Read More > "
 
                     android:textColor="@color/black"
                     android:textSize="13sp"
@@ -208,18 +207,12 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/skilllayout">
 
-                <TextView
-                    android:id="@+id/view4"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="4dp"
-                    android:background="@color/colorEditTextHint"></TextView>
+
 
                 <ImageView
                     android:id="@+id/personalimage"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_below="@+id/view4"
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="20dp"
                     android:src="@drawable/manuser"
@@ -231,10 +224,9 @@
                     android:id="@+id/personalhead"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/view4"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="30dp"
-                    android:layout_toRightOf="@+id/personalimage"
+                    android:layout_alignTop="@+id/personalimage"
+                    android:layout_marginStart="18dp"
+                    android:layout_toEndOf="@+id/personalimage"
                     android:text="Personal Info"
                     android:textColor="@color/black"
                     android:textSize="16sp"
@@ -243,12 +235,10 @@
                 <TextView
                     android:id="@+id/personaltext"
                     android:layout_width="wrap_content"
+                    android:layout_marginRight="20dp"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/personalhead"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginRight="3dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_toRightOf="@+id/personalimage"
+                    android:layout_alignStart="@+id/personalhead"
+                    android:layout_below="@+id/personalimage"
                     android:text="Skillsnbasdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
                     android:textColor="@color/black"
                     android:textSize="13sp" />
@@ -271,7 +261,7 @@
                     android:layout_marginRight="3dp"
 
                     android:layout_marginTop="10dp"
-                    android:text="Read More"
+                    android:text="Read More > "
                     android:textColor="@color/black"
                     android:textSize="13sp"
                     android:textStyle="bold" />
@@ -422,7 +412,7 @@
                         android:layout_marginLeft="40dp"
                         android:layout_marginRight="3dp"
                         android:layout_marginTop="10dp"
-                        android:text="Read More"
+                        android:text="Read More > "
                         android:textColor="@color/black"
                         android:textSize="13sp"
                         android:textStyle="bold" />
